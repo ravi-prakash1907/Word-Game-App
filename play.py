@@ -13,7 +13,7 @@ rules = "\nRULES:- \n\
 
 menu = ["1) Main Menu", "2) Summer (of this game)", "3) Exit"]
 
-def validateWord(player):   # returns   =>  False=lost, goto summery, True=it's right word
+def validateWord(player):
     global lastLetter
     global firstLetter
     global tempWord
