@@ -12,6 +12,7 @@ rules = "\nRULES:- \n\
         \n\t4) All words must be in small letter.\n"
 
 menu = ["1) Main Menu", "2) Summary (of this game)", "3) Exit"]
+menuS = ["1) Main Menu", "2) Exit"]
 
 def validateWord(player):
     global lastLetter
@@ -47,7 +48,20 @@ def max(a, b):
         x = len(b)
     return x
 
-def summery(drawCheck):
+def postSummaryMenu():
+    print("\nEnter your choice:-")
+    for item in menuS:
+        print("\n\t", item)
+    choice = int(input("\n\n* Enter your choice: "))
+
+    if choice==1:
+        print("\nMain Menu is called!")
+        return True
+    elif choice==2:
+        print("\nExiting")
+        return False
+
+def summary(drawCheck):
     global wordsByP1
     global wordsByP2
     global p1
@@ -74,6 +88,8 @@ def summery(drawCheck):
     else:
         print("\tWinner is ", p1, "!")
 
+    postSummaryMenu()
+
 def endGameMenu(drawCheck):
     print("\nMenu:-", end="")
     for item in menu:
@@ -82,11 +98,12 @@ def endGameMenu(drawCheck):
 
     if choice==1:
         print("\nMain Menu is called!")
+        return True
     elif choice==2:
-        summery(drawCheck-1)
+        summary(drawCheck-1)
     else:
         print("\nExiting", end="")
-        quit()
+        return False
 
 def beg():
     '''     variable decleration    '''
@@ -157,4 +174,4 @@ def beg():
     drawCheck = turns
     turns = i
 
-    endGameMenu(drawCheck)
+    return endGameMenu(drawCheck)
