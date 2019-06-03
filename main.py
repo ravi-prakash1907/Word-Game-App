@@ -22,9 +22,7 @@ class mainMenu:
 
     def checkChoice(self, num):
         if (num == 1):
-            p.beg()
-            print("Play Module will be called.")
-            return True
+            return p.beg()
         elif (num == 2):
             a.details()
             return True
