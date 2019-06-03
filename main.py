@@ -17,23 +17,29 @@ class mainMenu:
         for item in self.menu:
             print("\n\t", item)
         num = int(input("\n\n* Enter your choice: "))
-        self.__checkChoice(num)
+        return self.__checkChoice(num)
 
 
     def checkChoice(self, num):
         if (num == 1):
             p.beg()
             print("Play Module will be called.")
+            return True
         elif (num == 2):
             a.details()
+            return True
         elif (num == 3):
             c.developer()
+            return True
         elif (num == 4):
             self.__winnerChoice()
+            return True
         elif (num == 5):
-            print("Exit Module will be called.")
+            print("Exiting!!")
+            return False
         else:
             print("Invalid choice!!")
+            return False
 
     def winnerChoice(self):
         self.winMenu = ['Choose:-\n', '1) All Time Winners', '2) Recent Few']
@@ -57,8 +63,9 @@ class mainMenu:
 def main():
     print("\n\nMAIN-MENU\n")
     begin = mainMenu()
-    while True:
-        begin.getChoice(0)
+    handler = True
+    while handler:
+        handler = begin.getChoice(0)
 # ends main
 
 

@@ -80,6 +80,7 @@ def endGameMenu(drawCheck):
         summery(drawCheck-1)
     else:
         print("\nexiting")
+        quit()
 
 def beg():
     '''     variable decleration    '''

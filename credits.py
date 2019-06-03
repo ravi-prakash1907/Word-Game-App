@@ -1,6 +1,6 @@
 #   complete
 
-str = "This game is presented by \"Ravi Prakash\""
+str = "This game is developed by \"Ravi Prakash\""
 
 def developer():
     print(str)
