@@ -11,7 +11,7 @@ rules = "\nRULES:- \n\
         \n\tthe word. \
         \n\t4) All words must be in small letter.\n"
 
-menu = ["1) Main Menu", "2) Summer (of this game)", "3) Exit"]
+menu = ["1) Main Menu", "2) Summary (of this game)", "3) Exit"]
 
 def validateWord(player):
     global lastLetter
@@ -41,32 +41,38 @@ def validateWord(player):
         print("\nSorry! You\'ve crossed limit.\nWinner is ", player, "!")
         return False
 
+def max(a, b):
+    x = len(a)
+    if len(b) > x:
+        x = len(b)
+    return x
+
 def summery(drawCheck):
     global wordsByP1
     global wordsByP2
     global p1
     global p2
-    global turns
-    winner = ''
+    turns = max(wordsByP1, wordsByP2)
     i=0
+
     print("\n\n\tWords entered respectivally:-\n\n", end="")
-    for i in range (0, turns):
-        if wordsByP2[i]=='*':       #here is the problem
-            print("\tBy "+p1+wordsByP1[i], end="")
-            break
-        elif wordsByP1[i]=='*':
-            break
-        else:
-            print("\tBy "+p1+wordsByP1[i], end="")
-            print("\tBy "+p2+wordsByP2[i])
-    print("\n")
-    print("\n---------------\n\n\tResult:-\n", end="")
+    for i in range (0, turns-1):
+        print("\tBy "+p1+": "+wordsByP1[i], end="")
+        print("\tBy "+p2+": "+wordsByP2[i])
+    if len(wordsByP1)!=len(wordsByP2):
+        if turns==len(wordsByP1):
+            print("\tBy "+p1+": "+wordsByP1[i])
+    else:
+        print("\tBy "+p1+": "+wordsByP1[i], end="")
+        print("\tBy "+p2+": "+wordsByP2[i])
+
+    print("\n---------------\n\nResult:-\n", end="")
     if drawCheck==i:
         print("\tMatch Draw!")
     if i%2==0:
-        print("\nWinner is ", p2, "!")
+        print("\tWinner is ", p2, "!")
     else:
-        print("\nWinner is ", p1, "!")
+        print("\tWinner is ", p1, "!")
 
 def endGameMenu(drawCheck):
     print("\nEnter your choice:-")
@@ -79,7 +85,7 @@ def endGameMenu(drawCheck):
     elif choice==2:
         summery(drawCheck-1)
     else:
-        print("\nexiting")
+        print("\nExiting")
         quit()
 
 def beg():
