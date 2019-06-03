@@ -22,23 +22,23 @@ def validateWord(player):
     while True:
         if lastLetter!=firstLetter:
             if tempWord=='*':
-                print("\nCongrats", player, "!! You won the Game!\n")
+                print("\nCongrats", player, "!! You won the Game!\n", end="")
                 return False
             else:
                 print("\nWord must begin with \'", lastLetter, "\'!")
-                tempWord = input("\nEither enter right word, or accept your loss by entering \'*\': ")
+                tempWord = input("Either enter right word, or accept your loss by entering \'*\': ")
                 firstLetter = tempWord[0]
         if lastLetter == firstLetter:
             return True
         elif tempWord=='*':
-            print("\nCongrats", player, "!! You won the Game!\n")
+            print("Congrats", player, "!! You won the Game!\n")
             return False
         i+=1
         if i==3:
             break
 
     if i==3:
-        print("\nSorry! You\'ve crossed limit.\nWinner is ", player, "!")
+        print("Sorry! You\'ve crossed limit.\nWinner is ", player, "!")
         return False
 
 def max(a, b):
@@ -55,7 +55,7 @@ def summery(drawCheck):
     turns = max(wordsByP1, wordsByP2)
     i=0
 
-    print("\n\n\tWords entered respectivally:-\n\n", end="")
+    print("\n\tWords entered respectivally:-\n\n", end="")
     for i in range (0, turns-1):
         print("\tBy "+p1+": "+wordsByP1[i], end="")
         print("\tBy "+p2+": "+wordsByP2[i])
@@ -75,7 +75,7 @@ def summery(drawCheck):
         print("\tWinner is ", p1, "!")
 
 def endGameMenu(drawCheck):
-    print("\nEnter your choice:-")
+    print("\nMenu:-", end="")
     for item in menu:
         print("\n\t", item)
     choice = int(input("\n\n* Enter your choice: "))
@@ -85,7 +85,7 @@ def endGameMenu(drawCheck):
     elif choice==2:
         summery(drawCheck-1)
     else:
-        print("\nExiting")
+        print("\nExiting", end="")
         quit()
 
 def beg():
@@ -114,19 +114,19 @@ def beg():
     input("\n\t Hit to proceed.\n")
 
     print("\n\nLet\'s Begin:-\n")
-    p1 = input("\nName of first player: ")
-    p2 = input("\nName of second player:")
+    p1 = input("Name of first player: ")
+    p2 = input("Name of second player:")
     turns = int(input("No. of words that each player\'d enter (max 40): "))
     #can varify that number is between 1 to 40 only
     turns *= 2
-    disp = "\n"+p1+"\nEnter first word: "
+    disp = p1+"\nEnter first word: "
     tempWord = input(disp)
     lastLetter = tempWord[-1]
 
     wordsByP1.append(tempWord)
     for i in range (1, turns):
         if i%2==0:
-            disp1 = "\n"+p1+"! Enter next word, starting with \'"+lastLetter+": "
+            disp1 = p1+"! Enter next word, starting with \'"+lastLetter+": "
             tempWord = input(disp1)
             firstLetter = tempWord[0]
             #timer
@@ -136,7 +136,7 @@ def beg():
             else:
                 break
         else:
-            disp2 = "\n"+p2+"! Enter next word, starting with \'"+lastLetter+"\': "
+            disp2 = p2+"! Enter next word, starting with \'"+lastLetter+"\': "
             tempWord = input(disp2)
             firstLetter = tempWord[0]
             #timer
@@ -148,7 +148,7 @@ def beg():
                 break
 
     if i==turns:
-        print("\n\nMatch Draw!!")
+        print("\n\nMatch Draw!!", end="")
     elif i%2==0:
         w.win_update(p2)
     else:
