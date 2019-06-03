@@ -2,6 +2,7 @@ import credits as c
 import about as a       #using as statement
 import winners as w
 import play as p
+import menu as m
 
 # mainMenu
 
@@ -9,7 +10,7 @@ class mainMenu:
     """     docstring for mainMenu   """
 
     def __init__(self):
-        self.menu = ["1) Play", "2) About", "3) Credit", "4) Winners", "5) Exit"]
+        self.menu = m.menu
 
 
 

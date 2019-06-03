@@ -2,6 +2,7 @@
 
 import winners as w
 import clear as c
+import menu as m
 
 rules = "\nRULES:- \n\
         \n\t1) Players must have to enter the word within a fixed \
@@ -11,8 +12,7 @@ rules = "\nRULES:- \n\
         \n\tthe word. \
         \n\t4) All words must be in small letter.\n"
 
-menu = ["1) Main Menu", "2) Summary (of this game)", "3) Exit"]
-menuS = ["1) Main Menu", "2) Exit"]
+menuP = ["1) Main Menu", "2) Summary (of this game)", "3) Exit"]
 
 def validateWord(player):
     global lastLetter
@@ -48,51 +48,42 @@ def max(a, b):
         x = len(b)
     return x
 
-def postSummaryMenu():
-    print("\nEnter your choice:-")
-    for item in menuS:
-        print("\n\t", item)
-    choice = int(input("\n\n* Enter your choice: "))
-
-    if choice==1:
-        print("\nMain Menu is called!")
-        return True
-    elif choice==2:
-        print("\nExiting")
-        return False
-
 def summary(drawCheck):
     global wordsByP1
     global wordsByP2
     global p1
     global p2
     turns = max(wordsByP1, wordsByP2)
+    winner=''
     i=0
 
     print("\n\tWords entered respectivally:-\n\n", end="")
-    for i in range (0, turns-1):
-        print("\tBy "+p1+": "+wordsByP1[i], end="")
-        print("\tBy "+p2+": "+wordsByP2[i])
-    if len(wordsByP1)!=len(wordsByP2):
-        if turns==len(wordsByP1):
-            print("\tBy "+p1+": "+wordsByP1[i])
+    if len(wordsByP2)!=0:
+        for i in range (0, turns-1):
+            print("\tBy "+p1+": "+wordsByP1[i], end="")
+            print("\tBy "+p2+": "+wordsByP2[i])
+    if len(wordsByP1)==len(wordsByP2):
+        print("\tBy "+p1+": "+wordsByP1[len(wordsByP1)-1], end="")
+        print("\tBy "+p2+": "+wordsByP2[len(wordsByP1)-1])
+        winner=p2
+    elif len(wordsByP2)==0:
+        print("\tBy "+p1+": "+wordsByP1[len(wordsByP1)-1])
+        winner=p1
     else:
-        print("\tBy "+p1+": "+wordsByP1[i], end="")
-        print("\tBy "+p2+": "+wordsByP2[i])
+        print("\tBy "+p2+": "+wordsByP2[len(wordsByP2)-1])
+        winner=p2
 
     print("\n---------------\n\nResult:-\n", end="")
     if drawCheck==i:
         print("\tMatch Draw!")
-    if i%2==0:
-        print("\tWinner is ", p2, "!")
     else:
-        print("\tWinner is ", p1, "!")
+        print("\tWinner is ", winner, "!")
 
-    postSummaryMenu()
+    return m.postSummaryMenu()
 
 def endGameMenu(drawCheck):
     print("\nMenu:-", end="")
-    for item in menu:
+    for item in menuP:
         print("\n\t", item)
     choice = int(input("\n\n* Enter your choice: "))
 
@@ -100,7 +91,7 @@ def endGameMenu(drawCheck):
         print("\nMain Menu is called!")
         return True
     elif choice==2:
-        summary(drawCheck-1)
+        return summary(drawCheck-1)
     else:
         print("\nExiting", end="")
         return False
@@ -136,7 +127,7 @@ def beg():
     turns = int(input("No. of words that each player\'d enter (max 40): "))
     #can varify that number is between 1 to 40 only
     turns *= 2
-    disp = p1+"\nEnter first word: "
+    disp = p1+"! Enter first word: "
     tempWord = input(disp)
     lastLetter = tempWord[-1]
 
