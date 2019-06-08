@@ -1,5 +1,5 @@
 import credits as c
-import about as a       #using as statement
+import about as a
 import winners as w
 import play as p
 import menu as m
@@ -17,6 +17,7 @@ class mainMenu:
     def getChoice(self, num):
         for item in self.menu:
             print("\n\t", item)
+        num = 0
         num = int(input("\n\n* Enter your choice: "))
         return self.__checkChoice(num)
 

@@ -19,7 +19,7 @@ def validateWord(player):
     global firstLetter
     global tempWord
 
-    i = 0
+    i = 1
     while True:
         if lastLetter!=firstLetter:
             if tempWord=='*':
@@ -53,28 +53,49 @@ def summary(drawCheck):
     global wordsByP2
     global p1
     global p2
-    turns = max(wordsByP1, wordsByP2)
+    global turns
     winner=''
+    flag=0
     i=0
+    j=int(turns/2)-1
+    print(j)
 
     print("\n\tWords entered respectivally:-\n\n", end="")
+
     if len(wordsByP2)!=0:
-        for i in range (0, turns-1):
+        for i in range (0, j):
             print("\tBy "+p1+": "+wordsByP1[i], end="")
             print("\tBy "+p2+": "+wordsByP2[i])
-    if len(wordsByP1)==len(wordsByP2):
-        print("\tBy "+p1+": "+wordsByP1[len(wordsByP1)-1], end="")
-        print("\tBy "+p2+": "+wordsByP2[len(wordsByP1)-1])
-        winner=p2
-    elif len(wordsByP2)==0:
+            flag=1
+        if j==0 and flag==0:
+            print("\tBy "+p1+": "+wordsByP1[i], end="")
+            print("\tBy "+p2+": "+wordsByP2[i])
+            i+=1
+            winner=p2
+            if turns%2!=0:
+                print("\tBy "+p1+": "+wordsByP1[i])
+                winner=p1
+    else:
         print("\tBy "+p1+": "+wordsByP1[len(wordsByP1)-1])
         winner=p1
-    else:
-        print("\tBy "+p2+": "+wordsByP2[len(wordsByP2)-1])
-        winner=p2
+
+    if(flag==1):
+        if len(wordsByP1)==len(wordsByP2):
+            print("\tBy "+p1+": "+wordsByP1[len(wordsByP1)-1], end="")
+            print("\tBy "+p2+": "+wordsByP2[len(wordsByP1)-1])
+            winner=p2
+        elif len(wordsByP2)==0:
+            print("\tBy "+p1+": "+wordsByP1[len(wordsByP1)-1])
+            winner=p1
+        else:
+            print("\tBy "+p2+": "+wordsByP2[len(wordsByP2)-1])
+            winner=p2
 
     print("\n---------------\n\nResult:-\n", end="")
-    if drawCheck==i:
+
+    print(turns)
+
+    if drawCheck==turns:
         print("\tMatch Draw!")
     else:
         print("\tWinner is ", winner, "!")
@@ -91,7 +112,7 @@ def endGameMenu(drawCheck):
         print("\nMain Menu is called!")
         return True
     elif choice==2:
-        return summary(drawCheck-1)
+        return summary(drawCheck)
     else:
         print("\nExiting", end="")
         return False
@@ -132,7 +153,8 @@ def beg():
     lastLetter = tempWord[-1]
 
     wordsByP1.append(tempWord)
-    for i in range (1, turns):
+    i=1
+    while(i<turns):
         if i%2==0:
             disp1 = p1+"! Enter next word, starting with \'"+lastLetter+": "
             tempWord = input(disp1)
@@ -143,6 +165,7 @@ def beg():
                 lastLetter = tempWord[-1]
             else:
                 break
+            i+=1
         else:
             disp2 = p2+"! Enter next word, starting with \'"+lastLetter+"\': "
             tempWord = input(disp2)
@@ -154,6 +177,10 @@ def beg():
                 lastLetter = tempWord[-1]
             else:
                 break
+            i+=1
+
+    print(i)
+    print(turns)
 
     if i==turns:
         print("\n\nMatch Draw!!", end="")
