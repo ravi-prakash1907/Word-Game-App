@@ -1,4 +1,3 @@
 FROM python:3
-ADD src/main.py /
-RUN pip install pystrich
+COPY src .
 CMD [ "python", "./main.py" ]
